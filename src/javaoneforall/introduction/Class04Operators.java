@@ -47,5 +47,30 @@ public class Class04Operators {
         boolean canBeBought = currentAccount > playstationFivePrive || savingsAccount > playstationFivePrive;
         System.out.println("canBeBought = " + canBeBought);
 
+
+        // Assignment Operators - Operadores de Atribuição
+        // = += -= *= /= %=
+
+        double bonus = 1800;
+        bonus += 1000;
+        bonus -= 1000;
+        bonus *= 2;
+        bonus /= 2;
+        bonus %= 2;
+
+        // Unary = ++ -- (1 by one)
+        int count = 0;
+        System.out.println("count = " + count);
+        count++;
+        System.out.println("count = " + count);
+        count--;
+        System.out.println("count = " + count);
+
+        System.out.println(++count); // Adiciona antes, e printa
+        System.out.println(count++); // Printa e depois adiciona
+
+
+
+
     }
 }
