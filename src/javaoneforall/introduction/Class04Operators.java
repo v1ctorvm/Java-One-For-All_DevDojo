@@ -30,5 +30,22 @@ public class Class04Operators {
         System.out.println("isTenDifferentThanTwenty = " + isTenDifferentThanTwenty);
         System.out.println("isTenEqualsTwenty = " + isTenEqualsTwenty);
 
+        // && (AND) \ || (OR)
+
+        int age = 35;
+        float salary = 2500.0f;
+        boolean isLeagalOrderThanThirty = age >= 30 && salary >= 4612;
+        boolean isLeagalYungerThanThirty = age < 30 && salary >= 3381;
+        System.out.println("isLeagalYungerThanThirty = " + isLeagalYungerThanThirty);
+        System.out.println("isLeagalOrderThanThirty = " + isLeagalOrderThanThirty);
+
+
+
+        double currentAccount = 299;
+        double savingsAccount = 3000;
+        float playstationFivePrive = 500;
+        boolean canBeBought = currentAccount > playstationFivePrive || savingsAccount > playstationFivePrive;
+        System.out.println("canBeBought = " + canBeBought);
+
     }
 }
