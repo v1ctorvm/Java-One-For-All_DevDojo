@@ -1,8 +1,7 @@
 package javaoneforall.javacore.Aintroductionclasses.domain;
 
-public class Student {
+public class Car {
     public String name;
-    public int age;
-    public char gender;
-
+    public String model;
+    public int year;
 }
