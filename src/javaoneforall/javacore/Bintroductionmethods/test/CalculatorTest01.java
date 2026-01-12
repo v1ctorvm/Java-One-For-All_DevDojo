@@ -26,5 +26,10 @@ public class CalculatorTest01 {
         System.out.println("Number1: " + num1);
         System.out.println("Number2: " + num2);
 
+        int[] numeros = {1,2,3,4,5};
+        calculator.sumArray(numeros);
+        calculator.sumVarArgs(numeros);
+        calculator.sumVarArgs(1,2,3,4,5,6,7,8,9);
+
     }
 }

@@ -40,4 +40,27 @@ public class Calculator {
         System.out.println(num1 / num2);
     }
 
+    public void sumArray(int[] numbers) {
+
+        int sum = 0;
+        for (int num : numbers) {
+            sum += num;
+        }
+        System.out.println(sum);
+
+    }
+
+    public void sumVarArgs(int... numbers) {
+        if (numbers.length == 0) {
+            System.out.println("Empty array!");
+            return;
+        } else {
+            int sum = 0;
+            for (int num : numbers) {
+                sum += num;
+            }
+            System.out.println(sum);
+        }
+    }
+
 }
