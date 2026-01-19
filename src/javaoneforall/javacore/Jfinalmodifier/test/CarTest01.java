@@ -2,6 +2,7 @@ package javaoneforall.javacore.Jfinalmodifier.test;
 
 import javaoneforall.javacore.Jfinalmodifier.domain.Buyer;
 import javaoneforall.javacore.Jfinalmodifier.domain.Car;
+import javaoneforall.javacore.Jfinalmodifier.domain.Ferrari;
 
 public class CarTest01 {
     static void main() {
@@ -14,5 +15,9 @@ public class CarTest01 {
         car1.BUYER.setName("Kuririn");
         System.out.println(car1.BUYER);
 
+
+        Ferrari ferrari = new Ferrari();
+        ferrari.setName("Enzo");
+        ferrari.print();
     }
 }
