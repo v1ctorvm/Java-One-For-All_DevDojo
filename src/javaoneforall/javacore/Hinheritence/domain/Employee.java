@@ -6,11 +6,34 @@ public class Employee {
     protected Adress adress;
     protected double salary;
 
+    static {
+        System.out.println("Insitde Employee Static Init Block");
+    }
+
+    {
+        System.out.println("Insitde Employee Static Init Block 1 ");
+    }
+
+    {
+        System.out.println("Insitde Employee Static Init Block 2 ");
+    }
+
+
     public void print(){
         System.out.println("Name: " + this.name);
         System.out.println("Social Security Number: " + this.socialSecurityNumber);
         System.out.println("Salary: " + this.salary);
         System.out.println("Adress: " + this.adress.getSreet() + " " +this.adress.getZipcode());
+    }
+
+    public Employee(String name) {
+        System.out.println("Inside employee constructor");
+        this.name = name;
+    }
+
+    public Employee(String name, String socialSecurityNumber) {
+        this.name = name;
+        this.socialSecurityNumber = socialSecurityNumber;
     }
 
     public String getName() {

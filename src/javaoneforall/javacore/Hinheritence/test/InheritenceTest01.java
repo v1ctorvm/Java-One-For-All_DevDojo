@@ -11,8 +11,7 @@ public class InheritenceTest01 {
         adress.setSreet("12th Av");
         adress.setZipcode("13245");
 
-        Employee employee = new Employee();
-        employee.setName("Toyohisa Shimazu");
+        Employee employee = new Employee("Toyohisa Shimazu");
         employee.setSociaSecurityNumber("13123213");
         employee.setSalary(12000);
         employee.setAdress(adress);
@@ -20,8 +19,7 @@ public class InheritenceTest01 {
         employee.print();
 
         System.out.println("--------------");
-        Manager manager = new Manager();
-        manager.setName("Oda Nobunaga");
+        Manager manager = new Manager("Oda Nobunaga");
         manager.setSociaSecurityNumber("52324324");
         manager.setSalary(25000);
         manager.setAdress(adress);
