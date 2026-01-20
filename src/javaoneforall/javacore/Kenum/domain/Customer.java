@@ -1,32 +1,46 @@
 package javaoneforall.javacore.Kenum.domain;
 
 public class Customer {
-    public enum PaymentType {
-        DEBIT, CREDIT
-    }
-
     private String name;
     private CustomerType customerType;
     private PaymentType paymentType;
 
-    public Customer(String name, CustomerType customerType) {
+    public Customer(String name, CustomerType customerType, PaymentType paymentType) {
         this.name = name;
         this.customerType = customerType;
+        this.paymentType = paymentType;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "name='" + name + '\'' +
-                ", CustomerType=" + customerType.REPORT_VALUE +
-                ", CustomerTypeDataBateValue=" + customerType.DB_VALUE +
+                ", customerType=" + customerType +
                 ", paymentType=" + paymentType +
                 '}';
     }
 
-    public Customer(String name, CustomerType customerType, PaymentType paymentType) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+    public PaymentType getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
     }
 }
