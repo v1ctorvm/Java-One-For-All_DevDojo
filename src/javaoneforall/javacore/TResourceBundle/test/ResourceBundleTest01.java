@@ -1,4 +1,4 @@
-package javaoneforall.TResourceBundle.test;
+package javaoneforall.javacore.TResourceBundle.test;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
