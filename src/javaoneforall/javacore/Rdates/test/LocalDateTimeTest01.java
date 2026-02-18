@@ -7,6 +7,9 @@ public class LocalDateTimeTest01 {
 
         LocalDateTime ldt = LocalDateTime.now();
         System.out.println(ldt);
+        System.out.println(ldt.getHour());
+        String hora = ldt.toString();
+        System.out.println(hora);
 
     }
 }
