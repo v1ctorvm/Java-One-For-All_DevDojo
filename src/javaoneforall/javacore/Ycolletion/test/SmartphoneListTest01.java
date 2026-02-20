@@ -3,6 +3,7 @@ package javaoneforall.javacore.Ycolletion.test;
 import javaoneforall.javacore.Ycolletion.domain.Smartphone;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SmartphoneListTest01 {
@@ -30,8 +31,6 @@ public class SmartphoneListTest01 {
             System.out.println("-----------");
             System.out.println(smartphones.get(indexOf));
         }
-
-
 
 
 
