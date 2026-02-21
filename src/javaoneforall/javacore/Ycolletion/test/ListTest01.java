@@ -20,6 +20,7 @@ public class ListTest01 {
             System.out.println(name);
         }
 
+
         System.out.println("--------");
         for (int i = 0; i < names.size(); i++) {
             System.out.println(names.get(i));
