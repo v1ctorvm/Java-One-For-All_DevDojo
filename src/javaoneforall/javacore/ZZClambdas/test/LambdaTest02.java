@@ -8,9 +8,9 @@ public class LambdaTest02 {
     static void main() {
 
         List<String> strings = List.of("Victor", "Matheus", "Paim", "Callescura");
-        List<Integer> integers = map(strings, s -> s.length());
+        List<Integer> integers = map(strings, String::length);
         System.out.println(integers);
-        List<String> upperCases = map(strings, s -> s.toUpperCase());
+        List<String> upperCases = map(strings, String::toUpperCase);
         System.out.println(upperCases);
         List<String> teste = map(strings, s -> String.valueOf(s.toLowerCase().contains("v")));
         System.out.println(teste);
