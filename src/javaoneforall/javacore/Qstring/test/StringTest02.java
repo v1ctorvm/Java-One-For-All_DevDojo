@@ -9,5 +9,10 @@ public class StringTest02 {
         System.out.println(name.equalsIgnoreCase(name2));
         System.out.println(name.replace("f" ,"l"));
         System.out.println(name.trim()); // Remove Spaces
+
+
+        int n = 1;
+
+        char letra = name.charAt(n);
     }
 }

@@ -16,5 +16,13 @@ public class StringBuilderTest01 {
         sb.reverse();
         System.out.println(sb);
 
+
+        String str = "Chocolate";
+        String primeiro = String.valueOf(str.charAt(0));
+
+        String ultimo = String.valueOf(str.charAt(str.length()));
+
+
     }
+
 }
