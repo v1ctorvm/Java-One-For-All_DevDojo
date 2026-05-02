@@ -61,4 +61,8 @@ public class Person {
             return new Person(name, lastName, userName, email);
         }
     }
+
+    public String getName() {
+        return name;
+    }
 }
