@@ -12,10 +12,7 @@ public class ConnectionFactory {
         String username = "root";
         String password = "root";
 
-
         return DriverManager.getConnection(url, username, password);
-
-
     }
 
 }
