@@ -44,5 +44,11 @@ public class ProducerService {
     }
 
 
+    public static void showTypeScrollWorking(){
+        ProducerRepository.showTypeScrollWorking();
+    }
+
+
+
 
 }

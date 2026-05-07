@@ -152,6 +152,66 @@ public class ProducerRepository {
         } catch (SQLException e){
             log.error("Error white trying to find all producers",e);
         }
+    }
 
+
+    public static void showTypeScrollWorking(){
+
+        String sql = "SELECT * FROM anime_store.producer;";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)){
+
+
+            log.info("Last row: '{}",rs.last());
+            log.info("Row Number: '{}",rs.getRow());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("---------------------");
+
+            log.info("First row: '{}",rs.first());
+            log.info("Row Number: '{}",rs.getRow());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("---------------------");
+
+            log.info("Absolute row: '{}",rs.absolute(2));
+            log.info("Row Number: '{}",rs.getRow());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("---------------------");
+
+            log.info("Relative row: '{}",rs.relative(-1));
+            log.info("Row Number: '{}",rs.getRow());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("---------------------");
+
+            log.info("Is Last row: '{}",rs.isLast());
+            log.info("Row Number: '{}",rs.getRow());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("---------------------");
+
+            log.info("Is First row: '{}",rs.isFirst());
+            log.info("Row Number: '{}",rs.getRow());
+            log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+
+            log.info("---------------------");
+
+            log.info("After Last row: '{}",rs.last());
+            log.info("Row Number: '{}",rs.getRow());
+            rs.afterLast();
+
+            while(rs.previous()){
+                log.info(Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build());
+            }
+
+
+
+        } catch (SQLException e){
+            log.error("Error white trying to find all producers",e);
+        }
     }
 }

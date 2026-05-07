@@ -19,7 +19,7 @@ public class ConnectionFactoryTest01 {
 //        List<Producer> producers = ProducerService.findByName("");
 
 
-        ProducerService.showDriverMetaData();
+        ProducerService.showTypeScrollWorking();
 
 
 
