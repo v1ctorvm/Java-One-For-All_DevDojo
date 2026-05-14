@@ -43,6 +43,7 @@ public class ProducerRepository {
         }
 
     }
+
     public static void update(Producer producer){
 
          String sql = "UPDATE `anime_store`.`producer` SET `name` = '%s' WHERE (`id` = '%d');".formatted(producer.getName(),producer.getId());
@@ -58,6 +59,30 @@ public class ProducerRepository {
             log.error("Error white trying to update producer with id '{}'",producer.getId(),e);
         }
 
+    }
+
+    public static void updatePreparedStatement(Producer producer){
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = preparedStatementUpdate(conn,producer)){
+
+            int rowsAffected = ps.executeUpdate();
+            log.info("Updated producer with id '{}'. Affected rows in the database '{}'",producer.getId(),rowsAffected);
+
+        } catch (SQLException e){
+            log.error("Error white trying to update producer with id '{}'",producer.getId(),e);
+        }
+
+    }
+
+    private static PreparedStatement preparedStatementUpdate(Connection conn, Producer producer) throws SQLException {
+
+        String sql = "UPDATE `anime_store`.`producer` SET `name` = ? WHERE (`id` = ?);";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1,producer.getName());
+        ps.setInt(2,producer.getId());
+        return ps;
     }
 
 
@@ -93,6 +118,44 @@ public class ProducerRepository {
         }
 
         return producers;
+    }
+
+    public static List<Producer> findByNamePreparedStatement(String name) {
+
+
+
+        List<Producer> producers = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = preparedStatementFindByName(conn,name);
+             ResultSet rs = ps.executeQuery()) {
+
+
+            while (rs.next()) {
+
+                Producer producer = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+
+                producers.add(producer);
+            }
+
+            return producers;
+        } catch (SQLException e) {
+            log.error("Error white trying to find all producers", e);
+        }
+
+        return producers;
+    }
+
+    private static PreparedStatement preparedStatementFindByName(Connection conn, String name) throws SQLException {
+
+        String sql = "SELECT * FROM anime_store.producer WHERE name like ?;";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1,"%"+name+"%");
+        return ps;
     }
 
     public static void showResultSetMetaData(){
@@ -213,5 +276,101 @@ public class ProducerRepository {
         } catch (SQLException e){
             log.error("Error white trying to find all producers",e);
         }
+    }
+
+    public static List<Producer> findByNameAndUpdateToUpperCase(String name) {
+
+        String sql = "SELECT * FROM anime_store.producer WHERE name like '%%%s%%';"
+                .formatted(name);
+
+        List<Producer> producers = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                rs.updateString("name", rs.getString("name").toUpperCase());
+                rs.updateRow();
+
+                Producer producer = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+
+                producers.add(producer);
+            }
+
+            return producers;
+        } catch (SQLException e) {
+            log.error("Error white trying to find all producers", e);
+        }
+
+        return producers;
+    }
+
+    public static List<Producer> findByNameAndInsertWhenNotFound(String name) {
+
+        String sql = "SELECT * FROM anime_store.producer WHERE name like '%%%s%%';"
+                .formatted(name);
+
+        List<Producer> producers = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) return producers;
+
+            insertNewProucer(name, rs);
+
+
+            producers.add(getProducer(rs));
+
+        } catch (SQLException e) {
+            log.error("Error white trying to find all producers", e);
+        }
+
+        return producers;
+    }
+
+    public static List<Producer> findByNameAndDelete(String name) {
+
+        String sql = "SELECT * FROM anime_store.producer WHERE name like '%%%s%%';"
+                .formatted(name);
+
+        List<Producer> producers = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                log.info("Deleting '{}'", rs.getString("name"));
+                rs.deleteRow();
+            }
+
+        } catch (SQLException e) {
+            log.error("Error white trying to find all producers", e);
+        }
+
+        return producers;
+    }
+
+    private static Producer getProducer(ResultSet rs) throws SQLException {
+        rs.beforeFirst();
+        rs.next();
+
+        return Producer.builder()
+                .id(rs.getInt("id"))
+                .name(rs.getString("name"))
+                .build();
+    }
+
+    private static void insertNewProucer(String name, ResultSet rs) throws SQLException {
+        rs.moveToInsertRow();
+        rs.updateString("name", name);
+        rs.insertRow();
     }
 }

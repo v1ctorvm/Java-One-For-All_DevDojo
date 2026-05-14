@@ -14,12 +14,12 @@ public class ConnectionFactoryTest01 {
 
 
         Producer producer = Producer.builder().name("Studio Deen").build();
-        Producer producerUpdated = Producer.builder().name("MADHOUSE").id(1).build();
+        Producer producerUpdated = Producer.builder().name("MADHOUSES ").id(1).build();
 
-//        List<Producer> producers = ProducerService.findByName("");
+//        List<Producer> producers = ProducerService.findByNamePreparedStatement("Ma");
+//        log.info("Producers found '{}'",producers);
 
-
-        ProducerService.showTypeScrollWorking();
+        ProducerService.updatePreparedStatement(producerUpdated);
 
 
 

@@ -22,6 +22,11 @@ public class ProducerService {
         ProducerRepository.update(producer);
     }
 
+    public static void updatePreparedStatement(Producer producer) {
+        requireValidId(producer.getId());
+        ProducerRepository.updatePreparedStatement(producer);
+    }
+
     private static void requireValidId(Integer id){
         if (id == null || id <= 0){
             throw new IllegalArgumentException("Invalid value passed to id, is it bigger than 0?");
@@ -33,6 +38,10 @@ public class ProducerService {
 
     public static List<Producer> findByName(String name){
         return ProducerRepository.findByName(name);
+    }
+
+    public static List<Producer> findByNamePreparedStatement(String name) {
+        return ProducerRepository.findByNamePreparedStatement(name);
     }
 
     public static void showResultSetMetaData(){
@@ -47,6 +56,19 @@ public class ProducerService {
     public static void showTypeScrollWorking(){
         ProducerRepository.showTypeScrollWorking();
     }
+
+    public static List<Producer> findByNameAbnUpdateToUpperCase(String name) {
+        return ProducerRepository.findByNameAndUpdateToUpperCase(name);
+    }
+
+    public static List<Producer> findByNameAndInsertWhenNotFound(String name) {
+        return ProducerRepository.findByNameAndInsertWhenNotFound(name);
+    }
+
+    public static List<Producer> findByNameAndDelete(String name) {
+        return ProducerRepository.findByNameAndDelete(name);
+    }
+
 
 
 
