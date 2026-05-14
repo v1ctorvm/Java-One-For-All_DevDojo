@@ -148,6 +148,34 @@ public class ProducerRepository {
 
         return producers;
     }
+    public static List<Producer> findByNameCallableStatement(String name) {
+
+
+
+        List<Producer> producers = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = callableStatementFindByName(conn,name);
+             ResultSet rs = ps.executeQuery()) {
+
+
+            while (rs.next()) {
+
+                Producer producer = Producer.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+
+                producers.add(producer);
+            }
+
+            return producers;
+        } catch (SQLException e) {
+            log.error("Error white trying to find all producers", e);
+        }
+
+        return producers;
+    }
 
     private static PreparedStatement preparedStatementFindByName(Connection conn, String name) throws SQLException {
 
@@ -156,6 +184,15 @@ public class ProducerRepository {
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1,"%"+name+"%");
         return ps;
+    }
+    private static CallableStatement callableStatementFindByName(Connection conn, String name) throws SQLException {
+
+        String sql = "CALL `anime_store`.`sp_get_producer_by_name`(?);";
+
+
+        CallableStatement cs = conn.prepareCall(sql);
+        cs.setString(1,"%"+name+"%");
+        return cs;
     }
 
     public static void showResultSetMetaData(){
